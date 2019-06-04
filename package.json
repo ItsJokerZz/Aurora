@@ -1,0 +1,18 @@
+{
+  "name": "jokerzzbot",
+  "description": "A multi-purpose Discord bot created using Javascript alongside Discord.Js",
+  "version": "1.0.0",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "author": "ItsJokerZz",
+  "license": "MIT",
+  "dependencies": {
+    "cpu-stat": "^2.0.1",
+    "discord.js": "^11.5.1",
+    "ms": "^2.1.1",
+    "mysql": "^2.17.1",
+    "snekfetch": "^4.0.4"
+  }
+}

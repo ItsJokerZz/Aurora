@@ -8,6 +8,6 @@
 </p>
 
 ### `Features`
-Levels, Games, Welcome/Leave Messages, User Management, Server Statistics & More
+Levels, Games, Welcome/Leave Messages, User Management, Bot Statistics & More
 ### `Contributing`
 Feel free to make a pull request, I would love to see everyone's input!

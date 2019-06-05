@@ -43,6 +43,13 @@ module.exports.run = async (client, message, args) => {
         }
     }
 
+      if (!role) {
+            let embed = new Discord.RichEmbed()
+                .setColor("#0x9400d3")
+                .setTitle("Error Perfoming Command")
+                .setDescription("The @Muted role doesnt exist please create it.")
+            message.channel.send(embed);
+        }
     if (user.roles.has(role.id)) {
         let embed = new Discord.RichEmbed()
         .setColor("#0x9400d3")
@@ -50,12 +57,6 @@ module.exports.run = async (client, message, args) => {
         .setDescription("You cannot mute a user which is already muted.")
         message.channel.send(embed)
     } else {
-        if (!role) {
-            let embed = new Discord.RichEmbed()
-                .setColor("#0x9400d3")
-                .setDescription("The @Muted role doesnt exist please create it.")
-            message.channel.send(embed);
-        }
         if (!args[1]) {
 
             let embed = new Discord.RichEmbed()

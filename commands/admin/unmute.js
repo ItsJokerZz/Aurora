@@ -42,30 +42,39 @@ module.exports.run = async (client, message, args) => {
     }
   }
 
-  if (!user.roles.has(role.id)) {
-    message.channel.send({
-      embed: {
-        color: 0x9400d3,
-        title: "Error Perfoming Command",
-        description: "The specified user is not muted."
-      }
-    })
-  }
-
-  await user.removeRole(role);
-
-  let embed = new Discord.RichEmbed()
-    .setColor("#0x9400d3")
-    .addField("Unmuted User", `${user}`)
-    .addField("Unmuted By", `<@509956886041329665>`)
-
-  if (channel) {
-    channel.send(embed);
+  if (!role) {
+    let embed = new Discord.RichEmbed()
+      .setColor("#0x9400d3")
+      .setTitle("Error Perfoming Command")
+      .setDescription("The @Muted role doesnt exist please create it.")
+    message.channel.send(embed);
   } else {
-    if (!channel) {
-      embed.setDescription("Log messages will be sent in the channel the command was ran.\n" +
-        "If you wish to change that create a channel called bot-logs.");
-      message.channel.send(embed);
+    if (!user.roles.has(role.id)) {
+      message.channel.send({
+        embed: {
+          color: 0x9400d3,
+          title: "Error Perfoming Command",
+          description: "The specified user is not muted."
+        }
+      })
+    } else {
+
+      await user.removeRole(role);
+
+      let embed = new Discord.RichEmbed()
+        .setColor("#0x9400d3")
+        .addField("Unmuted User", `${user}`)
+        .addField("Unmuted By", `<@509956886041329665>`)
+
+      if (channel) {
+        channel.send(embed);
+      } else {
+        if (!channel) {
+          embed.setDescription("Log messages will be sent in the channel the command was ran.\n" +
+            "If you wish to change that create a channel called bot-logs.");
+          message.channel.send(embed);
+        }
+      }
     }
   }
 }

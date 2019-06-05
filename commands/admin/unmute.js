@@ -42,18 +42,22 @@ module.exports.run = async (client, message, args) => {
     }
   }
 
-  if (!role || !user.roles.has(role.id)) return message.channel.send({
-    embed: {
-      color: 0x9400d3,
-      description: "The specified user is not muted."
-    }
-  })
+  if (!user.roles.has(role.id)) {
+    message.channel.send({
+      embed: {
+        color: 0x9400d3,
+        title: "Error Perfoming Command",
+        description: "The specified user is not muted."
+      }
+    })
+  }
 
   await user.removeRole(role);
 
   let embed = new Discord.RichEmbed()
     .setColor("#0x9400d3")
     .addField("Unmuted User", `${user}`)
+    .addField("Unmuted By", `<@509956886041329665>`)
 
   if (channel) {
     channel.send(embed);

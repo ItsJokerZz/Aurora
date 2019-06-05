@@ -24,10 +24,17 @@ module.exports.run = async (client, message, args) => {
             body
         } = await snekfetch.get(`https://nekobot.xyz/api/imagegen?type=tweet&username=${user.startsWith("@") ? user.slice(1) : user}&text=${encodeURIComponent(text)}`);
 
+        const fetched = await message.channel.fetchMessages({
+            count: 1
+        });
+        
+        message.channel.bulkDelete(fetched)
+
         let embed = new Discord.RichEmbed()
             .setColor("0x9400d3")
             .setTitle(`A tweet from ${user}!`)
             .setImage(body.message)
+            .setFooter(`Requested by ${message.author.username}#${message.author.discriminator}`)
         message.channel.send(embed);
     }
 }

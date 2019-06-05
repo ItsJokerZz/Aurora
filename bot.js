@@ -181,7 +181,7 @@ client.on("message", async message => {
         let sql;
 
         if (rows.length < 1) {
-            sql = `INSERT INTO jokerzzbot (id, xp, msgs, blocked) VALUES ('${message.author.id}', ${generateXp()}, '0', '1')`;
+            sql = `INSERT INTO jokerzzbot (id, xp, msgs, blocked) VALUES ('${message.author.id}', ${generateXp()}, '0', '0')`;
         } else {
             let xp = rows[0].xp;
             let msgs = rows[0].msgs + 1;
@@ -201,11 +201,21 @@ client.on("message", async message => {
     let cmdFile = client.commands.get(cmd.slice(prefix.length));
     if (cmdFile) cmdFile.run(client, message, args, con);
 
-    let embed = new Discord.RichEmbed()
-        .setColor("0x9400d3")
-        .setAuthor('Error: You must use a command after the "j-" preifx.\nUse `j-help` for a list of commands.')
-
-    if (cmd === prefix) return message.channel.send(embed)
+     if (cmd === prefix) {
+        let embed = new Discord.RichEmbed()
+            .setColor("0x9400d3")
+            .setTitle("Missing Argument")
+            .setDescription('You must include a command after "j-"\nUse "j-help" for a list of commands.')
+        message.channel.send(embed)
+    } else {
+        if (!cmdFile) {
+            let embed = new Discord.RichEmbed()
+                .setColor("0x9400d3")
+                .setTitle("Unknown Command")
+                .setDescription('Use "j-help" for a list of commands.')
+            message.channel.send(embed);
+        }
+    }
 });
 
 client.login("Your-Token-Goes-Here");

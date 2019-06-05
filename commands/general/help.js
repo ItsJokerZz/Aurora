@@ -101,10 +101,13 @@ module.exports.run = async (client, message, args) => {
 
                             general.on('collect', r => {
                                 embed.setTitle("General Commands");
-
+								
                                 embed.setDescription('**Invite**\n' +
                                     'Sends the bot\'s invite link with ItsJokerZz\'s sever invite.\n\n' +
-                                    
+
+                                    '**Report (j-report <@User> <Reason>)**\n' +
+                                    'Reports a user so one of the admin/mods can look into a kick, ban, warn, or mute.\n\n' +
+
                                     '**Stats**\n' +
                                     'Displays your stats you have earned from sending messages.\n\n' +
 

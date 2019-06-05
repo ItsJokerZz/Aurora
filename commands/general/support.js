@@ -3,7 +3,6 @@ const Discord = require("discord.js");
 let recent = new Set();
 
 module.exports.run = async (client, message, args, con) => {
-
     let user = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0])) || message.author;
 
     con.query(`SELECT * FROM jokerzzbot WHERE id = '${user.id}'`, (err, rows) => {
@@ -36,7 +35,7 @@ module.exports.run = async (client, message, args, con) => {
                 embed: {
                     color: 0x9400d3,
                     title: "Support Message",
-                    description: `Username\n${user.username}#${user.discriminator}\n\nMessage\n${msg}`
+                    description: `Username\n${user.username}#${user.discriminator}\n\nUsers ID\n${user.id}\n\n\nMessage\n${msg}`
                 }
             })
             message.channel.send({
@@ -50,11 +49,10 @@ module.exports.run = async (client, message, args, con) => {
                     description: "If you abuse this you will be blacklisted from using this command!\nOh and sorry for the inconvenience if you have had a problem. :heart:"
                 }
             });
+            recent.add(user.id);
         }
-    })
+    })    
 
-    recent.add(user.id);
-    
     setTimeout(() => {
         recent.delete(user.id);
     }, 1800000);

@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 
 module.exports.run = async (client, message, args) => {
   let user = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
-  let role = message.guild.roles.find(role => role.name === "Muted");
   let channel = message.guild.channels.find(channel => channel.name === "bot-logs");
 
   if (!args[0]) return message.channel.send({
@@ -22,7 +21,7 @@ module.exports.run = async (client, message, args) => {
   if (user.hasPermission("ADMINISTRATOR")) return message.channel.send({
     embed: {
       color: 0x9400d3,
-      description: `<@${message.author.id}> You cannot mute an administrator!`
+      description: `<@${message.author.id}> You cannot unmute an administrator!`
     }
   })
   else {
@@ -41,6 +40,8 @@ module.exports.run = async (client, message, args) => {
       })
     }
   }
+
+  let role = message.guild.roles.find(role => role.name === "Muted");
 
   if (!role) {
     let embed = new Discord.RichEmbed()

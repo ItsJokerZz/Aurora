@@ -7,13 +7,23 @@ module.exports.run = async (client, message, args) => {
   if (!args[0]) return message.channel.send({
     embed: {
       color: 0x9400d3,
+      title: "Error Perfoming Command",
       description: "You must specify a user!"
+    }
+  })
+
+  if (!user) return message.channel.send({
+    embed: {
+      color: 0x9400d3,
+      title: "Error Perfoming Command",
+      description: "Cannot find the specifed user."
     }
   })
 
   if (args[0] == message.author) return message.channel.send({
     embed: {
       color: 0x9400d3,
+      title: "Error Perfoming Command",
       description: "You cannot mute yourself!"
     }
   });
@@ -21,24 +31,18 @@ module.exports.run = async (client, message, args) => {
   if (user.hasPermission("ADMINISTRATOR")) return message.channel.send({
     embed: {
       color: 0x9400d3,
+      title: "Error Perfoming Command",
       description: `<@${message.author.id}> You cannot unmute an administrator!`
     }
   })
   else {
-    if (!user) return message.channel.send({
+    if (!message.member.hasPermission("MUTE_MEMBER")) return message.channel.send({
       embed: {
         color: 0x9400d3,
-        description: "Cannot find the specifed user."
+        title: "Error Perfoming Command",
+        description: `<@${message.author.id}> You must be able to mute members to use this command!`
       }
     })
-    else {
-      if (!message.member.hasPermission("MUTE_MEMBER")) return message.channel.send({
-        embed: {
-          color: 0x9400d3,
-          description: `<@${message.author.id}> You must be able to mute members to use this command!`
-        }
-      })
-    }
   }
 
   let role = message.guild.roles.find(role => role.name === "Muted");

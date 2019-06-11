@@ -28,7 +28,7 @@ module.exports.run = async (client, message, args) => {
             count: 1
         });
         
-        message.channel.bulkDelete(fetched)
+        message.delete(fetched);
 
         let embed = new Discord.RichEmbed()
             .setColor("0x9400d3")
@@ -38,6 +38,7 @@ module.exports.run = async (client, message, args) => {
         message.channel.send(embed);
     }
 }
+
 module.exports.help = {
     name: "tweet"
 }

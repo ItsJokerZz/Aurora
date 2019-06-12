@@ -84,14 +84,14 @@ client.on("ready", () => {
         'Created using JavaScript.',
         'Hosted using aws.com',
         `Currently in ${client.guilds.size} guilds.`,
-        `${client.users.size - 1} total users in guilds.`,
+        `${client.users.size} total users in guilds.`,
     ];
     setInterval(() => {
         const index = Math.floor(Math.random() * (activities_list.length - 1) + 1);
         client.user.setActivity(activities_list[index]);
     }, 10000);
 
-    console.log(`\nBot has started with...\n${client.users.size - 1} users\n${client.guilds.size} guilds\n${client.channels.size} channels\n`);
+    console.log(`\nBot has started with...\n${client.users.size} users\n${client.guilds.size} guilds\n${client.channels.size} channels\n`);
 
     setInterval(() => {
         process.stdout.cursorTo(0);
@@ -113,21 +113,20 @@ client.on("ready", () => {
     var am_pm = date.getHours() >= 12 ? "PM" : "AM";
     hours = hours < 10 ? "0" + hours : hours;
     var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-    var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-    time = hours + ":" + minutes + ":" + seconds + " " + am_pm;
-    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    time = hours + ":" + minutes + " " + am_pm;
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     var date = days[date.getDay()] + ", " + months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();
-    var dateTime = "Bot started on: " + date + " " + time + " (GMT-4 EDT)\n"
+    var dateTime = "Bot started on: " + date + " at " + time + " (UTC-4:00) Eastern Time\n"
     console.log(dateTime);
 
-    exports.start = `Bot started on: ${date} ${time} (GMT-4 EDT)`;
+    exports.start = `Bot started on: ${date} at ${time} (UTC-4:00) Eastern Time`;
 });
 
 var con = mysql.createConnection({
     host: "HOST",
     port: "PORT",
-    user: "USERNAME",
+    user: "1Fr9q4Mcdw",
     password: "PASSWORD",
     database: "DATABASE"
 })
@@ -143,7 +142,6 @@ con.connect(err => {
 
 setInterval(() => {
     con.query(`SELECT * FROM con_loop WHERE isOn = 1`, (err, rows) => {
-
         if (err) throw err;
 
         let loop;
@@ -152,7 +150,7 @@ setInterval(() => {
         loop = `UPDATE con_loop SET time = ${time} WHERE isOn = 1`;
         con.query(loop);
     })
-}, 60000);
+}, 600000);
 
 function generateXp() {
     let max = 30;
@@ -162,15 +160,14 @@ function generateXp() {
 }
 
 client.on("guildCreate", guild => {
-    console.log(`\n\nGuild Update...\nJoined: ${guild.name}.\n${guild.memberCount - 1} users\n${guild.channels.size} channels\n\n`);
+    console.log(`\n\nGuild Update...\nJoined: ${guild.name}.\n${guild.memberCount} users\n${guild.channels.size} channels\n\n`);
 });
 
 client.on("guildDelete", guild => {
-    console.log(`\n\nGuild Update...\nRemoved from: ${guild.name}.\n\n`);
+    console.log(`\n\nGuild Update...\nRemoved from: ${guild.name}.\n${guild.memberCount} users\n${guild.channels.size} channels\n\n`);
 });
 
 client.on("message", async message => {
-
     if (message.author.bot) return;
     if (message.channel.type === "dm") return;
 
@@ -181,7 +178,7 @@ client.on("message", async message => {
         let sql;
 
         if (rows.length < 1) {
-            sql = `INSERT INTO jokerzzbot (id, xp, msgs, blocked) VALUES ('${message.author.id}', ${generateXp()}, '0', '0')`;
+            sql = `INSERT INTO jokerzzbot (id, xp, msgs, blocked) VALUES ('${message.author.id}', ${generateXp()}, '0', '1')`;
         } else {
             let xp = rows[0].xp;
             let msgs = rows[0].msgs + 1;
@@ -201,7 +198,7 @@ client.on("message", async message => {
     let cmdFile = client.commands.get(cmd.slice(prefix.length));
     if (cmdFile) cmdFile.run(client, message, args, con);
 
-     if (cmd === prefix) {
+    if (cmd === prefix) {
         let embed = new Discord.RichEmbed()
             .setColor("0x9400d3")
             .setTitle("Missing Argument")
@@ -218,4 +215,4 @@ client.on("message", async message => {
     }
 });
 
-client.login("Your-Token-Goes-Here");
+client.login("TOKEN GOES HERE");

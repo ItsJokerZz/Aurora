@@ -1,4 +1,4 @@
-title JokerZzBot
+title Aurora
 
 color 0d
 

@@ -43,7 +43,7 @@ module.exports.run = async (client, message, args, con) => {
                     color: 0x9400d3,
                     author: {
                         name: "Contacted ItsJokerZz",
-                        icon_url: "https://cdn.discordapp.com/app-icons/509956886041329665/e07efbfe762d0da99d4584e37d6f00e1.png"
+                        icon_url: "https://cdn.discordapp.com/avatars/238216765623107584/39a738f20b7934e86b34b0b261fa4b29.png"
                     },
                     title: "He will reply ASAP please be patient.",
                     description: "If you abuse this you will be blacklisted from using this command!\nOh and sorry for the inconvenience if you have had a problem. :heart:"

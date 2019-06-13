@@ -78,8 +78,8 @@ fs.readdir("./commands/utility/", (err, file) => {
 client.on("ready", () => {
 
     const activities_list = [
-        'The prefix is j-',
-        'Use "j-help" for assistance.',
+        'The prefix is a^',
+        'Use "a^help" for assistance.',
         'Developed by ItsJokerZz.',
         'Created using JavaScript.',
         'Hosted using aws.com',
@@ -126,7 +126,7 @@ client.on("ready", () => {
 var con = mysql.createConnection({
     host: "HOST",
     port: "PORT",
-    user: "1Fr9q4Mcdw",
+    user: "PASSWORD",
     password: "PASSWORD",
     database: "DATABASE"
 })
@@ -171,24 +171,24 @@ client.on("message", async message => {
     if (message.author.bot) return;
     if (message.channel.type === "dm") return;
 
-    con.query(`SELECT * FROM jokerzzbot WHERE id = '${message.author.id}'`, (err, rows) => {
+    con.query(`SELECT * FROM aurora WHERE id = '${message.author.id}'`, (err, rows) => {
 
         if (err) throw err;
 
         let sql;
 
         if (rows.length < 1) {
-            sql = `INSERT INTO jokerzzbot (id, xp, msgs, blocked) VALUES ('${message.author.id}', ${generateXp()}, '0', '1')`;
+            sql = `INSERT INTO aurora (id, xp, msgs, blocked) VALUES ('${message.author.id}', ${generateXp()}, '0', '1')`;
         } else {
             let xp = rows[0].xp;
             let msgs = rows[0].msgs + 1;
 
-            sql = `UPDATE jokerzzbot SET xp = ${xp + generateXp()}, msgs = '${msgs}' WHERE id = '${message.author.id}'`;
+            sql = `UPDATE aurora SET xp = ${xp + generateXp()}, msgs = '${msgs}' WHERE id = '${message.author.id}'`;
         }
         con.query(sql);
     });
 
-    let prefix = ("j-")
+    let prefix = ("a^")
     let msgArray = message.content.split(" ");
     let cmd = msgArray[0].toString();
     let args = msgArray.slice(1);
@@ -202,14 +202,14 @@ client.on("message", async message => {
         let embed = new Discord.RichEmbed()
             .setColor("0x9400d3")
             .setTitle("Missing Argument")
-            .setDescription('You must include a command after "j-"\nUse "j-help" for a list of commands.')
+            .setDescription('You must include a command after "a^"\nUse "a^help" for a list of commands.')
         message.channel.send(embed)
     } else {
         if (!cmdFile) {
             let embed = new Discord.RichEmbed()
                 .setColor("0x9400d3")
                 .setTitle("Unknown Command")
-                .setDescription('Use "j-help" for a list of commands.')
+                .setDescription('Use "a^help" for a list of commands.')
             message.channel.send(embed);
         }
     }

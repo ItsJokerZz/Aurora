@@ -3,7 +3,7 @@ const Discord = require("discord.js")
 module.exports.run = async (client, message, args, con) => {
     let target = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0])) || message.author;
 
-    con.query(`SELECT * FROM jokerzzbot WHERE id = '${target.id}'`, (err, rows) => {
+    con.query(`SELECT * FROM aurora WHERE id = '${target.id}'`, (err, rows) => {
 
         if (err) throw err;
 

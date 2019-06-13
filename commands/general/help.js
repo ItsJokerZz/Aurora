@@ -57,19 +57,19 @@ module.exports.run = async (client, message, args) => {
                             admin.on('collect', r => {
                                 embed.setTitle("Admin Commands");
 
-                                embed.setDescription("**Ban (j-ban <@User> <Reason>)**\n" +
+                                embed.setDescription("**Ban <@User> <Reason>**\n" +
                                     "Bans a member from the server.\n\n" +
 
-                                    "**Kick (j-kick <@User> <Reason>)**\n" +
+                                    "**Kick (kick <@User> <Reason>)**\n" +
                                     "Kicks a member from the server.\n\n" +
 
-                                    "**Mute (j-mute <@User>)**\n" +
+                                    "**Mute <@User>**\n" +
                                     "Mutes a member from the server.\n\n" +
 
-                                    "**Purge (j-purge <2-100>)**\n" +
+                                    "**Purge <2-100>**\n" +
                                     "Deletes a defined amount of messages.\n\n" +
 
-                                    "**Unmute (j-unmute <@User>)**\n" +
+                                    "**Unmute <@User>**\n" +
                                     "Unmutes a member from the server.\n\n")
 
                                 embed.setFooter("")
@@ -80,7 +80,7 @@ module.exports.run = async (client, message, args) => {
                                 embed.setTitle("Fun Commands");
 
                                 embed.setDescription(
-                                    "**8ball (j-8ball <Question>)**\n" +
+                                    "**8ball <Question>**\n" +
                                     "Answers all of your questions.\n\n" +
 
                                     "**Flip**\n" +
@@ -89,10 +89,10 @@ module.exports.run = async (client, message, args) => {
                                     "**Roll**\n" +
                                     "Rolls a dice and gives you the results.\n\n" +
 
-                                    "**RPS (j-rps <rock, paper, or scissors>)**\n" +
+                                    "**RPS <rock, paper, or scissors>**\n" +
                                     "Play rock, paper, scissors with the bot.\n\n" +
 
-                                    "**Tweet (j-tweet <@Username / Username> <Message>)**\n" +
+                                    "**Tweet <@Username / Username> <Message>**\n" +
                                     "Sends an image of a fake tweet from the specified user along with the message.")
 
                                 embed.setFooter("")
@@ -105,16 +105,16 @@ module.exports.run = async (client, message, args) => {
                                 embed.setDescription('**Invite**\n' +
                                     'Sends the bot\'s invite link with ItsJokerZz\'s sever invite.\n\n' +
 
-                                    '**Report (j-report <@User> <Reason>)**\n' +
+                                    '**Report <@User> <Reason>**\n' +
                                     'Reports a user so one of the admin/mods can look into a kick, ban, warn, or mute.\n\n' +
 
                                     '**Stats**\n' +
                                     'Displays your stats you have earned from sending messages.\n\n' +
 
-                                    '**Stats (j-stats <@User>)**\n' +
+                                    '**Stats <@User>)**\n' +
                                     'Displays the stats of the mentioned user they earned from sending messages.\n\n' +
 
-                                    '**Support (j-support <Message>)**\n' +
+                                    '**Support <Message>**\n' +
                                     'DMs ItsJokerZz with your username and discriminator along with your message.')
 
                                 embed.setFooter("")

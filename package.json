@@ -1,5 +1,5 @@
 {
-  "name": "jokerzzbot",
+  "name": "aurora",
   "description": "A multi-purpose Discord bot created using Javascript alongside Discord.Js",
   "version": "1.0.0",
   "main": "bot.js",

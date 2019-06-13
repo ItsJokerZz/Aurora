@@ -60,7 +60,7 @@ module.exports.run = async (client, message, args) => {
                                 embed.setDescription("**Ban <@User> <Reason>**\n" +
                                     "Bans a member from the server.\n\n" +
 
-                                    "**Kick (kick <@User> <Reason>)**\n" +
+                                    "**Kick <@User> <Reason>**\n" +
                                     "Kicks a member from the server.\n\n" +
 
                                     "**Mute <@User>**\n" +

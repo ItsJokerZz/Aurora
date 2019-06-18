@@ -61,7 +61,5 @@ process.on('uncaughtException', (error) => {
 // Event Handling
 client.on('ready', () => require('./Events/ready.js')(client, con));
 client.on('message', (message) => require('./Events/message.js')(client, message, con));
-client.on('disconnect', () => require('./Events/disconnect.js')(client));
-client.on('reconnecting', () => require('./Events/reconnecting.js')(client));
 
 client.login(client.config.token);

@@ -2,13 +2,15 @@
   "name": "aurora",
   "description": "A multi-purpose Discord bot created using Javascript alongside Discord.Js",
   "version": "1.0.0",
-  "main": "bot.js",
+  "main": "aurora.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node aurora.js"
   },
   "author": "ItsJokerZz",
   "license": "MIT",
   "dependencies": {
+    "chalk": "^2.4.2",
+    "colors": "^1.3.3",
     "cpu-stat": "^2.0.1",
     "discord.js": "^11.5.1",
     "ms": "^2.1.1",

@@ -1,0 +1,15 @@
+{
+    "token": "",
+    "prefix": "",
+    "owner": "",
+    "botName": "",
+
+    "sqlHost": "",
+    "sqlPort": "",
+    "sqlUser": "",
+    "sqlPass": "",
+    "sqlDB": "",
+
+    "XP_Table": "",
+    "Loop_Table": "",
+}

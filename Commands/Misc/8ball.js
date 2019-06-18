@@ -1,6 +1,6 @@
 const Discord = require("discord.js")
 
-let EighBallResponces = [
+let responces = [
     'Yeah.',
     'Of Course!',
     'Nope.',
@@ -62,9 +62,9 @@ let EighBallResponces = [
     ':thinking:',
 ]
 
-module.exports.run = async (client, message, args) => {
-    const EightBallQuestion = args.join(" ");
-    let EightBallFetched = EighBallResponces[Math.floor(Math.random() * EighBallResponces.length)];
+module.exports = (client, message, args) => {
+    const question = args.join(' ');
+    let fetched = responces[Math.floor(Math.random() * responces.length)];
 
     if (!args[0]) {
         let embed = new Discord.RichEmbed()
@@ -76,12 +76,8 @@ module.exports.run = async (client, message, args) => {
         message.channel.send({
             embed: {
                 color: 0x9400d3,
-                title: `:question: ${EightBallQuestion}\n:8ball: ${EightBallFetched}`
+                title: `:question: ${question}\n:8ball: ${fetched}`
             }
         });
     }
-}
-
-module.exports.help = {
-    name: "8ball"
 }

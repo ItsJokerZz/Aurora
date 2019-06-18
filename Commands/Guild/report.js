@@ -2,8 +2,8 @@ const Discord = require("discord.js");
 
 let recent = new Set();
 
-module.exports.run = async (client, message, args) => {
-    let user = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0])) || message.author;
+module.exports = (client, message, args) => {
+    let user = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     let channel = message.guild.channels.find(channel => channel.name === "bot-logs");
     let reason = args.join(" ").slice(22);
 
@@ -73,8 +73,4 @@ module.exports.run = async (client, message, args) => {
             recent.delete(user.id);
         }, 300000);
     }
-}
-
-module.exports.help = {
-    name: "report"
 }

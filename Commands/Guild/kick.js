@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-module.exports.run = async (client, message, args) => {
+module.exports = (client, message, args) => {
   let user = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
   let channel = message.guild.channels.find(channel => channel.name === "bot-logs");
   let reason = args.join(" ").slice(22);
@@ -15,14 +15,14 @@ module.exports.run = async (client, message, args) => {
   if (args[0] == message.author) return message.channel.send({
     embed: {
       color: 0x9400d3,
-      description: "You cannot ban yourself!"
+      description: "You cannot kick yourself!"
     }
   });
 
   if (user.hasPermission("ADMINISTRATOR")) return message.channel.send({
     embed: {
       color: 0x9400d3,
-      description: `<@${message.author.id}> You cannot ban an administrator!`
+      description: `<@${message.author.id}> You cannot kick an administrator!`
     }
   })
   else {
@@ -33,10 +33,10 @@ module.exports.run = async (client, message, args) => {
       }
     })
     else {
-      if (!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send({
+      if (!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send({
         embed: {
           color: 0x9400d3,
-          description: `<@${message.author.id}> You must be able to ban members to use this command!`
+          description: `<@${message.author.id}> You must be able to kick members to use this command!`
         }
       })
     }
@@ -47,29 +47,24 @@ module.exports.run = async (client, message, args) => {
         .setDescription("You must include a reason.")
       message.channel.send(embed);
     } else {
-
       let embed = new Discord.RichEmbed()
         .setColor("#0x9400d3")
-        .addField("Banned User", `${user}`)
-        .addField("Banned By", `<@${message.author.id}>`)
-        .addField("Banned In", message.channel)
+        .addField("Kicked User", `${user}`)
+        .addField("Kicked By", `<@${message.author.id}>`)
+        .addField("Kicked In", message.channel)
         .addField("Reason", reason);
 
       if (channel) {
         channel.send(embed);
-        message.guild.member(user).ban(reason);
+        message.guild.member(user).kick(reason);
       } else {
         if (!channel) {
           embed.setDescription("Log messages will be sent in the channel the command was ran.\n" +
-          "If you wish to change that create a channel called bot-logs.");
+            "If you wish to change that create a channel called bot-logs.");
           message.channel.send(embed);
-          message.guild.member(user).ban(reason);
+          message.guild.member(user).kick(reason);
         }
       }
     }
   }
-}
-
-module.exports.help = {
-  name: "ban"
 }

@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const snekfetch = require("snekfetch");
 
-module.exports.run = async (client, message, args) => {
+module.exports = async (client, message, args) => {
     const [user, ...restArgs] = args;
     const text = restArgs.join(' ');
 
@@ -37,8 +37,4 @@ module.exports.run = async (client, message, args) => {
             .setFooter(`Requested by ${message.author.username}#${message.author.discriminator}`)
         message.channel.send(embed);
     }
-}
-
-module.exports.help = {
-    name: "tweet"
 }

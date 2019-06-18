@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const ms = require("ms");
 
-module.exports.run = async (client, message, args) => {
+module.exports = async (client, message, args) => {
     let user = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
     let channel = message.guild.channels.find(channel => channel.name === "bot-logs");
 
@@ -130,8 +130,4 @@ module.exports.run = async (client, message, args) => {
             }
         }
     }
-}
-
-module.exports.help = {
-    name: "mute"
 }

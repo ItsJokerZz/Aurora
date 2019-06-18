@@ -27,7 +27,7 @@ client.commands.set('support', require('./Commands/Assistance/support.js'));
 client.commands.set('ban', require('./Commands/Guild/ban.js'));
 client.commands.set('kick', require('./Commands/Guild/kick.js'));
 client.commands.set('mute', require('./Commands/Guild/mute.js'));
-client.commands.set('unmute', require('./Commands/Guild/purge.js'));
+client.commands.set('purge', require('./Commands/Guild/purge.js'));
 client.commands.set('report', require('./Commands/Guild/report.js'));
 client.commands.set('unmute', require('./Commands/Guild/unmute.js'));
 

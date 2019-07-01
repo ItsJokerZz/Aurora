@@ -12,6 +12,8 @@ module.exports = (client, message, con) => {
             } else {
                 let xp = rows[0].xp;
                 let msgs = rows[0].msgs + 1;
+                let level = rows[0].level;
+                let requiredXP = (level * 50) + ((level * level) * 25);
 
                 sql = `UPDATE ${client.config.Rank_Table} SET msgs = '${msgs}' WHERE guild = '${message.guild.id}' AND id = '${message.author.id}'`;
 
@@ -20,6 +22,12 @@ module.exports = (client, message, con) => {
                     let min = 10;
 
                     return Math.floor(Math.random() * (max - min + 1)) + 10;
+                }
+
+                if (xp >= requiredXP) {
+                    level = (level + 1);
+                    sql = `UPDATE ${client.config.Rank_Table} SET level = '${level}' WHERE guild = '${message.guild.id}' AND id = '${message.author.id}'`;
+                    con.query(sql);
                 }
 
                 let chance = Math.round(Math.random() * 100);

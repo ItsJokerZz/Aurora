@@ -15,17 +15,10 @@ module.exports = (client, message, args, con) => {
                 message.channel.send(`${user.displayName} has no stats on record.`)
             }
         } else {
-            let sql;
             let XP = rows[0].xp;
             let level = rows[0].level;
             let msgs = rows[0].msgs;
             let requiredXP = (level * 50) + ((level * level) * 25);
-
-            if (XP >= requiredXP) {
-                level = (level + 1);
-                sql = `UPDATE ${client.config.Rank_Table} SET level = '${level}' WHERE guild = '${message.guild.id}' AND id = '${message.author.id}'`;
-                con.query(sql);
-            }
 
             if (user.id == message.author.id) {
                 let embed = new Discord.RichEmbed()

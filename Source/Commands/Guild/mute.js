@@ -47,8 +47,8 @@ module.exports = (client, message, args, con, prefix) => {
                                     message.reply(`sorry ${user} is already muted!`);
                                 } else {
                                     if (args[1]) {
-                                        if (args[1].includes("s" || "m" || "h" || "d" || "y")) {
-                                            message.reply("the time must be in the followng format: 1s, 1m, ect. If you dont't the user will be muted until unmuted.");
+                                        if (!args[1].includes("s" || "m" || "h" || "d" || "y")) {
+                                            message.reply("the time must be in the followng format: 1s, 1m, ect. If you dont't the user will be muted until unmuted.")
 
                                             if (channel) {
                                                 channel.send(embed);
@@ -61,28 +61,7 @@ module.exports = (client, message, args, con, prefix) => {
                                                 message.channel.send(embed);
                                             }
                                         } else {
-                                            if (args[1]) {
-                                                embed.addField("Time Muted For", args[1]);
-
-                                                setTimeout(function () {
-                                                    user.removeRole(role.id);
-
-                                                    let embed = new Discord.RichEmbed()
-                                                        .setColor("0x0AA0A0")
-                                                        .addField("Unmuted", `${user}`)
-
-                                                    if (channel) {
-                                                        channel.send(embed);
-                                                    } else {
-                                                        let noteEmbed = new Discord.RichEmbed()
-                                                            .setColor("0xF00000")
-                                                            .setTitle("__PLEASE NOTE__")
-                                                            .setDescription(`Logs will be sent in the channel the command was ran in unless you\neither create the channel, use the setup command by using **${prefix}setup**,\nor use the config command for more info on this command use **${prefix}config usage**`)
-                                                        message.channel.send(noteEmbed);
-                                                        message.channel.send(embed);
-                                                    }
-                                                }, ms(args[1]));
-                                            }
+                                            embed.addField("Time Muted For", args[1]);
 
                                             if (channel) {
                                                 channel.send(embed);
@@ -94,9 +73,39 @@ module.exports = (client, message, args, con, prefix) => {
                                                 message.channel.send(noteEmbed);
                                                 message.channel.send(embed);
                                             }
-                                            user.addRole(role.id);
+
+                                            setTimeout(function () {
+                                                user.removeRole(role.id);
+
+                                                let embed = new Discord.RichEmbed()
+                                                    .setColor("0x0AA0A0")
+                                                    .addField("Unmuted", `${user}`)
+
+                                                if (channel) {
+                                                    channel.send(embed);
+                                                } else {
+                                                    let noteEmbed = new Discord.RichEmbed()
+                                                        .setColor("0xF00000")
+                                                        .setTitle("__PLEASE NOTE__")
+                                                        .setDescription(`Logs will be sent in the channel the command was ran in unless you\neither create the channel, use the setup command by using **${prefix}setup**,\nor use the config command for more info on this command use **${prefix}config usage**`)
+                                                    message.channel.send(noteEmbed);
+                                                    message.channel.send(embed);
+                                                }
+                                            }, ms(args[1]));
+                                        }
+                                    } else {
+                                        if (channel) {
+                                            channel.send(embed);
+                                        } else {
+                                            let noteEmbed = new Discord.RichEmbed()
+                                                .setColor("0xF00000")
+                                                .setTitle("__PLEASE NOTE__")
+                                                .setDescription(`Logs will be sent in the channel the command was ran in unless you\neither create the channel, use the setup command by using **${prefix}setup**,\nor use the config command for more info on this command use **${prefix}config usage**`)
+                                            message.channel.send(noteEmbed);
+                                            message.channel.send(embed);
                                         }
                                     }
+                                    user.addRole(role.id);
                                 }
                             }
                         }

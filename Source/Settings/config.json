@@ -1,0 +1,17 @@
+{
+    "token": "",
+    "prefix": "",
+    "owner": "",
+    "botName": "",
+    "ownerID": "",
+    "botID": "",
+
+    "sqlHost": "",
+    "sqlPort": "",
+    "sqlUser": "",
+    "sqlPass": "",
+    "sqlDB": "",
+    "Rank_Table": "",
+    "Loop_Table": "",
+    "Config_Table": ""
+}

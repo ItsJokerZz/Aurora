@@ -1,3 +1,5 @@
+### `THE BOT IS CURRENTLY UNDERGOING MAINTENANCE AND MAJOR CHANGES ARE COMING`
+
 <p align="center">
    <img src="https://cdn.discordapp.com/app-icons/509956886041329665/0eb7e6c1824aadce95d6c33d4ce933ca.png?size=128" width="200"/>
 <p align="center">

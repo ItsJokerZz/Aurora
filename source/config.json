@@ -1,7 +1,7 @@
 {
     "name": "Aurora",
     "prefix": "a^",
-    "token": "NTU5MTk0MTQxMjk3MzQ0NTEy.XJbkIA._WFAcegpi130sjXaMLwQH5Y04XY",
+    "token": "",
     "creatorTag": "ItsJokerZz#5159",
 
     "showAsciiLogo": 1,
@@ -13,15 +13,15 @@
         "hideInfo": 0,
 
         "connection": {
-            "host": "sql9.freemysqlhosting.net",
-            "port": "3306",
-            "username": "sql9613170",
-            "password": "bZ6rLARP9e",
-            "database": "sql9613170",
+            "host": "",
+            "port": "",
+            "username": "",
+            "password": "",
+            "database": "",
 
             "tables": {
-                "config": "config",
-                "ranking": "ranking"
+                "config": "",
+                "ranking": ""
             },
 
             "guildSettings": {

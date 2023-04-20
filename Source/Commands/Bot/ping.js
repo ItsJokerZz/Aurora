@@ -1,15 +1,33 @@
-const Discord = require('discord.js');
+const {
+    EmbedBuilder
+} = require("discord.js");
 
-module.exports = (client, message, args) => {
-    let date = new Date();
-    let time = date.getTime();
-    let msgTime = message.createdTimestamp;
-    let latency = msgTime - time;
+module.exports = {
+    name: "ping",
+    aliases: ["latency", "delay", "responce"],
 
-    let embed = new Discord.RichEmbed()
-        .setColor("0x0AA0A0")
-        .setTitle("Ping Statistics")
-        .addField("API Latency", `${Math.round(client.ping)} ms`, true)
-        .addField("Client Latency", `${latency} ms`, true)
-    message.channel.send(embed);
+    run: async (client, message) => {
+        const msg = await message.reply("Pinging...")
+
+        const embed = new EmbedBuilder()
+            .setColor(0x0AA0A0)
+            .setTitle("Latency Information")
+            .addFields({
+                name: "🤖 Client (Message)",
+                value: `** ${new Date().getTime() - msg.createdTimestamp} ms ⌛**`,
+                inline: true
+            }, {
+                name: "🖥️ API (Discord)",
+                value: `**${client.ws.ping} ms ⌛**`,
+                inline: true
+            }).setFooter({
+                text: "Results MAY vary depending on area, usage, time, etc."
+            })
+
+        msg.delete().then(() => {
+            message.reply({
+                embeds: [embed]
+            })
+        })
+    }
 }

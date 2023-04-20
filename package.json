@@ -1,0 +1,27 @@
+{
+  "name": "aurora",
+  "version": "1.2.0",
+  "description": "A multi-purpose Discord bot created using Javascript alongside Discord.Js",
+  "readme": "README.md",
+  "main": "./index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itsjokerzz/aurora.git"
+  },
+  "author": "ItsJokerZz",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cpu-stat": "^2.0.1",
+    "discord.js": "^14.8.0",
+    "fs": "^0.0.1-security",
+    "mysql": "^2.18.1",
+    "node": "^19.8.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}

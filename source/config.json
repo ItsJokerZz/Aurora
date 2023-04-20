@@ -1,0 +1,32 @@
+{
+    "name": "Aurora",
+    "prefix": "a^",
+    "token": "NTU5MTk0MTQxMjk3MzQ0NTEy.XJbkIA._WFAcegpi130sjXaMLwQH5Y04XY",
+    "creatorTag": "ItsJokerZz#5159",
+
+    "showAsciiLogo": 1,
+    "commandLogging": 1,
+
+    "mysql": {
+        "enabled": 1,
+        "hidePass": 1,
+        "hideInfo": 0,
+
+        "connection": {
+            "host": "sql9.freemysqlhosting.net",
+            "port": "3306",
+            "username": "sql9613170",
+            "password": "bZ6rLARP9e",
+            "database": "sql9613170",
+
+            "tables": {
+                "config": "config",
+                "ranking": "ranking"
+            },
+
+            "guildSettings": {
+                "keepDataAfterLeft": 1
+            }
+        }
+    }
+}

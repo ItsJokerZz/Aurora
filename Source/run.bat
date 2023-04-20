@@ -1,5 +1,0 @@
-title Aurora
-
-node .
-
-pause

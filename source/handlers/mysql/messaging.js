@@ -1,44 +1,33 @@
-/* 
-add toggle
-track xp for ALL messages
-keep count of commands ran
-AND non-command messages
-
-DO rewards AND leaderboard
-
-etc, etc, etc...
-
-FIGURE OUT why I can't use "sqlConnection"
-*/
-
 const mysql = require('./functions.js');
-const logging = require('../console-log.js');
 
 module.exports = (client, message) => {
-    let data = `SELECT * FROM ${client.config.mysql.connection.tables.ranking} WHERE guild = '${message.guild.id}' AND user = '${message.author.id}'`;
+    const {
+        guild,
+        author
+    } = message;
+
+    const data = `SELECT * FROM ${client.config.mysql.connection.tables.ranking} WHERE guild = '${guild.id}' AND user = '${author.id}'`;
 
     mysql.query(data, (rows) => {
-        if (rows.length < 1) {
-            data = `INSERT INTO ${client.config.mysql.connection.tables.ranking} (guild, user, level, messages, xp) VALUES ('${message.guild.id}', '${message.author.id}', '1', '1', '10')`;
-        } else {
-            const xp = rows[0].xp;
-            const msgs = rows[0].messages + 1;
-            const level = rows[0].level;
-            
-            data = `UPDATE ${client.config.mysql.connection.tables.ranking} SET messages = '${msgs}' WHERE guild = '${message.guild.id}' AND user = '${message.author.id}'`;
+        const xp = rows.length ? rows[0].xp : 0;
+        const msgs = rows.length ? rows[0].messages + 1 : 1;
+        const level = rows.length ? rows[0].level : 1;
+        const xpNeeded = level * 50 + level * level * 25;
 
-            if (xp >= level * 50 + level * level * 25) {
-                data = `UPDATE ${client.config.mysql.connection.tables.ranking} SET level = '${level + 1}' WHERE guild = '${message.guild.id}' AND user = '${message.author.id}'`;
-                // mysql.query(data, () => {}) // maybe un-needed
-            }
+        let query = `INSERT INTO ${client.config.mysql.connection.tables.ranking} (guild, user, level, messages, xp) VALUES ('${guild.id}', '${author.id}', '1', '1', '10')`;
 
-            if (Math.round(Math.random() * 100) <= 100 / 5) {
-                data = `UPDATE ${client.config.mysql.connection.tables.ranking} SET xp = ${xp + Math.floor(Math.random() * (25 - 10 + 1)) + 10}, messages = '${msgs}' WHERE guild = '${message.guild.id}' AND user = '${message.author.id}'`;
+        if (rows.length) {
+            query = `UPDATE ${client.config.mysql.connection.tables.ranking} SET messages = '${msgs}' WHERE guild = '${guild.id}' AND user = '${author.id}'`;
+
+            if (xp >= xpNeeded)
+                query = `UPDATE ${client.config.mysql.connection.tables.ranking} SET level = '${level + 1}' WHERE guild = '${guild.id}' AND user = '${author.id}'`;
+
+            if (Math.round(Math.random() * 100) <= 20) {
+                const randomXp = Math.floor(Math.random() * 16) + 10;
+                query = `UPDATE ${client.config.mysql.connection.tables.ranking} SET xp = ${xp + randomXp}, messages = '${msgs}' WHERE guild = '${guild.id}' AND user = '${author.id}'`;
             }
         }
 
-        mysql.query(data, () => {});
+        mysql.query(query, () => {});
     });
-
-    logging.success('RANKING RUNNING');
 };

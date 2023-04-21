@@ -1,27 +1,24 @@
-const mySQL = require("mysql")
+const mySQL = require("mysql");
 
 module.exports = (client, logging) => {
-    var mysql = mySQL.createConnection({
-        host: client.config.mysql.connection.host,
-        port: client.config.mysql.connection.port,
-        user: client.config.mysql.connection.username,
-        password: client.config.mysql.connection.password,
-        database: client.config.mysql.connection.database,
-    })
+  const { mysql: mysqlConfig } = client.config;
+  const { host, port, username, password, database } = mysqlConfig.connection;
+  const mysql = mySQL.createConnection({ host, port, user: username, password, database });
 
-    module.exports.connect = function () {
-        mysql.connect((error) => {
-            if (error) return logging.error(`MySQL Error: ${error.message}`)
-            logging.success("Connected to the MySQL server.", true)
-        })
-    }
+  function connect() {
+    mysql.connect((error) => {
+      if (error) return logging.error(`MySQL Error: ${error.message}`);
+      logging.success("Connected to the MySQL server.", true);
+    });
+  }
 
-    module.exports.query = function (query, callback) {
-        mysql.query(query, (error, rows) => {
-            if (error) return logging.error(`MySQL Error: ${error.message}`)
-            return callback(rows)
-        })
-    }
+  function query(sql, callback) {
+    mysql.query(sql, (error, rows) => {
+      if (error) return logging.error(`MySQL Error: ${error.message}`);
+      return callback(rows);
+    });
+  }
 
-    require("./connection.js")(client, logging);
-}
+  module.exports = { connect, query };
+  require("./connection.js")(client, logging);
+};

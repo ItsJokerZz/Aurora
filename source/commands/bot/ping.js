@@ -25,7 +25,7 @@ module.exports = {
             })
 
         msg.delete().then(() => {
-            message.reply({
+            message.channel.send({
                 embeds: [embed]
             })
         })

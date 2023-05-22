@@ -15,7 +15,7 @@ module.exports = {
             const XP = rows[0].xp;
             const level = rows[0].level;
             const msgs = rows[0].messages;
-            const requiredXP = (level * 50) + ((level * level) * 45);
+            const requiredXP = (level * 50) + ((level * level) * 25);
 
             const embed = new EmbedBuilder()
                 .setColor(0x0AA0A0)

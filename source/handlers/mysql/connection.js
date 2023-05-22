@@ -1,7 +1,9 @@
 const mysql = require('./functions.js');
 
 module.exports = (client, logging) => {
-  const { mysql: mysqlConfig } = client.config;
+  const {
+    mysql: mysqlConfig
+  } = client.config;
 
   logging.newLine('Checking if mySQL is enabled...'.bold, true);
 
@@ -15,7 +17,13 @@ module.exports = (client, logging) => {
   logging.newLine('Connecting to mySQL database...'.bold.italic, true);
 
   if (!mysqlConfig.hideInfo) {
-    const { host, port, username, password, database } = mysqlConfig.connection;
+    const {
+      host,
+      port,
+      username,
+      password,
+      database
+    } = mysqlConfig.connection;
     const passwordString = mysqlConfig.hidePass ? '*******' : password;
 
     logging.dropDown(`Host: ${host}:${port}`);
@@ -29,7 +37,11 @@ module.exports = (client, logging) => {
     logging.success('Connected to the MySQL server.', true);
   });
 
-  /* use a connection pool to bypass this issue
+  /* 
+  use a connection pool to bypass this issue
+   ✗ MySQL Error: read ECONNRESET
+   ✗ MySQL Error: Cannot enqueue Query after fatal error.
+   
    setInterval(() => {
      if (mysql.state === 'disconnected') {
        logging.warn('MySQL: Connection lost, trying to reconnect...');

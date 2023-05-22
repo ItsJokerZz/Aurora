@@ -1,33 +1,33 @@
+// add global leaderboards and rewards
 const mysql = require('./functions.js');
 
 module.exports = (client, message) => {
-    const {
-        guild,
-        author
-    } = message;
-
-    const data = `SELECT * FROM ${client.config.mysql.connection.tables.ranking} WHERE guild = '${guild.id}' AND user = '${author.id}'`;
+    let data = `SELECT * FROM ${client.config.mysql.connection.tables.ranking} WHERE guild = '${message.guild.id}' AND user = '${message.author.id}'`;
 
     mysql.query(data, (rows) => {
-        const xp = rows.length ? rows[0].xp : 0;
-        const msgs = rows.length ? rows[0].messages + 1 : 1;
-        const level = rows.length ? rows[0].level : 1;
-        const xpNeeded = level * 50 + level * level * 25;
+        if (config.client.mysql.ranking.guild && rows.length < 1)
+            data = `INSERT INTO ${client.config.mysql.connection.tables.ranking} (guild, user, level, xp, messages, rewards) VALUES ('${message.guild.id}', '${message.author.id}', '1', '10', '1', ${null})`;
+        else {
+            const xp = rows[0].xp;
+            const msgs = rows[0].messages + 1;
+            const level = rows[0].level;
+            const rewards = rows[0].rewards
 
-        let query = `INSERT INTO ${client.config.mysql.connection.tables.ranking} (guild, user, level, messages, xp) VALUES ('${guild.id}', '${author.id}', '1', '1', '10')`;
+            const chance = 30; // save globably and per guild
+            const successRate = Math.round(Math.random() * 100);
+            const requiredXP = (level * 50) + ((level * level) * 25);
 
-        if (rows.length) {
-            query = `UPDATE ${client.config.mysql.connection.tables.ranking} SET messages = '${msgs}' WHERE guild = '${guild.id}' AND user = '${author.id}'`;
-
-            if (xp >= xpNeeded)
-                query = `UPDATE ${client.config.mysql.connection.tables.ranking} SET level = '${level + 1}' WHERE guild = '${guild.id}' AND user = '${author.id}'`;
-
-            if (Math.round(Math.random() * 100) <= 20) {
-                const randomXp = Math.floor(Math.random() * 16) + 10;
-                query = `UPDATE ${client.config.mysql.connection.tables.ranking} SET xp = ${xp + randomXp}, messages = '${msgs}' WHERE guild = '${guild.id}' AND user = '${author.id}'`;
+            const randomXP = function (min = 10, max = 35) {
+                return Math.floor(Math.random() * (max - min + 1) + 10);
             }
+
+            data = `UPDATE ${client.config.mysql.connection.tables.ranking} SET messages = '${msgs}' WHERE guild = '${message.guild.id}' AND user = '${message.author.id}'`;
+            if (xp >= requiredXP) data = `UPDATE ${client.config.mysql.connection.tables.ranking} SET level = '${level + 1}' WHERE guild = '${message.guild.id}' AND user = '${message.author.id}'`;
+            if (successRate >= chance) data = `UPDATE ${client.config.mysql.connection.tables.ranking} SET xp = ${xp + randomXP()}, messages = '${msgs}' WHERE guild = '${message.guild.id}' AND user = '${message.author.id}'`;
         }
 
-        mysql.query(query, () => {});
+        mysql.query(data, () => {});
     });
+
+    mysql.query(data, () => {});
 };

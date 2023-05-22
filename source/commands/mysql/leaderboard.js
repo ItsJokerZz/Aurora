@@ -19,11 +19,9 @@ module.exports = {
                 .setTitle("Leaderboard")
 
             for (const data of rows) {
-                i++
-
                 embed.addFields({
                     name: ` `,
-                    value: `**${i}**. *<@${data.user}>*\n **Level *${data.level}* (*${data.xp} XP*)**`,
+                    value: `**${i++}**. *<@${data.user}>*\n **Level *${data.level}* (*${data.xp} XP*)**`,
                     inline: false
                 })
             }
